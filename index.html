@@ -27,13 +27,13 @@
           borderColor: red,
           backgroundColor: red,
           fill: false,
-          data: data.map(l => parseFloat(l[3]))
+          data: data.map(l => parseFloat(l[3])/8)
         },{
           label: 'Upload',
           borderColor: blue,
           backgroundColor: blue,
           fill: false,
-          data: data.map(l => parseFloat(l[4]))
+          data: data.map(l => parseFloat(l[4])/8)
         }],
       },
       options: {
@@ -59,7 +59,7 @@
             display: true,
             scaleLabel: {
               display: true,
-              labelString: 'Mbps'
+              labelString: 'MBps'
             }
           }]
         }
