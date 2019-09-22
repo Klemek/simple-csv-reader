@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Speed-Test</title>
+    <script type="text/javascript" src="lib/Chart.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+  </head>
+  <body>
+    <div style="width:75%">
+      <canvas id="speedtest"></canvas>
+    </div>
+    <script>
+  const red = 'rgb(255, 99, 132)';
+  const blue = 'rgb(54, 162, 235)';
+
+  const ctx = document.getElementById('speedtest').getContext('2d');
+  $.get('./speedtest.csv', (data)=>{
+    data = data.trim().split('\n').map(l=>l.split(','));
+    const stc = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: data.map(l => l[1]+' '+l[0]),
+        datasets: [{
+          label: 'Download',
+          borderColor: red,
+          backgroundColor: red,
+          fill: false,
+          data: data.map(l => parseFloat(l[3]))
+        },{
+          label: 'Upload',
+          borderColor: blue,
+          backgroundColor: blue,
+          fill: false,
+          data: data.map(l => parseFloat(l[4]))
+        }],
+      },
+      options: {
+        responsive: true,
+        title: {display: true, title: 'Speed-Test'},
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Time'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Mbps'
+            }
+          }]
+        }
+      },
+    });
+  });
+    </script>
+  </body>
+</html>
