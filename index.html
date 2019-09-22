@@ -17,28 +17,32 @@
 
   const ctx = document.getElementById('speedtest').getContext('2d');
   $.get('./speedtest.csv', (data)=>{
+    //Server ID,Sponsor,Server Name,Timestamp,Distance,Ping,Download,Upload,Share,IP Address
     data = data.trim().split('\n').map(l=>l.split(','));
     const stc = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: data.map(l => l[1]+' '+l[0]),
+        labels: data.map(l => l[3].replace(/(\d*)-(\d*)-(\d*)T(\d*):(\d*)(.*)/,'$4:$5 $3/$2/$1')), //00:00 00/00/0000
         datasets: [{
           label: 'Download',
           borderColor: red,
           backgroundColor: red,
           fill: false,
-          data: data.map(l => parseFloat(l[3])/8)
+          data: data.map(l => (parseFloat(l[6])/8e6).toFixed(3))
         },{
           label: 'Upload',
           borderColor: blue,
           backgroundColor: blue,
           fill: false,
-          data: data.map(l => parseFloat(l[4])/8)
+          data: data.map(l => (parseFloat(l[7])/8e6).toFixed(3))
         }],
       },
       options: {
         responsive: true,
-        title: {display: true, title: 'Speed-Test'},
+        title: {
+          display: true,
+          text: 'Speed-Test'
+        },
         tooltips: {
           mode: 'index',
           intersect: false,
@@ -50,6 +54,7 @@
         scales: {
           xAxes: [{
             display: true,
+            ticks: {display: false},
             scaleLabel: {
               display: true,
               labelString: 'Time'
