@@ -5,6 +5,8 @@ Set-up a cron job to update the CSV file and you're ready to go.
 
 You need to configure the first lines of `script.js` to get started
 
+**[live example](https://klemek.github.io/SimpleCSVReader/)**
+
 ![](sample.png)
 
 ## Example: Speed-Test
