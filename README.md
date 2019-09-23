@@ -3,7 +3,7 @@
 A static web page where you can read data from a CSV into a simple graph.
 Set-up a cron job to update the CSV file and you're ready to go.
 
-You need to configure the first lines of `script.js` to get started
+You need to configure the `something_config.js` and update `index.html` file for your case.
 
 **[live example](https://klemek.github.io/SimpleCSVReader/)**
 
@@ -56,7 +56,9 @@ Your endpoint should be already working (you might need to wait some time for da
 
 You can also check if the cron job is running with the `speedtest.log` file.
 
-Now you need to edit the script config like this:
+Now you need to edit the script config like this (don't forget to change the script reference in the `index.html`):
+
+`speedtest_config.js`
 ```javascript
 // === CONFIG ===
 
@@ -131,7 +133,9 @@ Your endpoint should be already working (you might need to wait some time for da
 
 You can also check if the cron job is running with the `sysinfo.log` file.
 
-Now you need to edit the script config like this:
+Now you need to edit the script config like this (don't forget to change the script reference in the `index.html`):
+
+`sysinfo_config.js`
 ```javascript
 // === CONFIG ===
 
