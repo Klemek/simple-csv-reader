@@ -170,7 +170,7 @@ function updateData(d) {
 }
 
 function meanLog(extract) {
-  return extract.reduce((a, b) => a.map((v, i) => CSV_COLUMNS.includes(i) ? a[i] + b[i] : v))
+  return extract.reduce((a, b) => a.map((v, i) => CSV_COLUMNS.includes(i) ? parseFloat(a[i]) + parseFloat(b[i]) : v))
     .map((v, i) => CSV_COLUMNS.includes(i) ? v / extract.length : v);
 }
 
@@ -250,7 +250,7 @@ window.onload = function () {
 
   setInterval(() => {
     load();
-  }, TIME_STEP * 60 * 1000);
+  }, Math.max(TIME_STEP * 60 * 1000, 10000));
 };
 
 function load() {
