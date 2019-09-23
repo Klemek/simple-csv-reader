@@ -12,9 +12,9 @@ const CSV_COLUMNS = [6, 7, 5];
 //Display data
 const GRAPH_TITLE = 'Speed-Test';
 const COLUMNS_NAME = ['Download', 'Upload', 'Ping'];
-const COLUMNS_FACTOR = [1 / 8e6, 1 / 8e6, 1];
+const COLUMNS_FACTOR = [1 / 8e6, 1 / 8e6, 1]; // the 2 firsts need to be scaled down
 const COLUMNS_PRECISION = [3, 3, 3];
-const COLUMNS_SECONDARY = [false, false, true];
+const COLUMNS_SECONDARY = [false, false, true]; // the Ping on the secondary axis
 const COLORS = [
   'rgb(255,99,132)',
   'rgb(54, 162, 235)',
