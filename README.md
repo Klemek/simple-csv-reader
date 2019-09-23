@@ -19,7 +19,7 @@ git clone https://github.com/klemek/SimpleCSVReader speedtest
 cd speedtest
 ```
 
-First, install the `speedtest-cli` tool
+Then, install the `speedtest-cli` tool
 
 ```
 sudo apt-get update
@@ -55,3 +55,31 @@ The bash script will adapt itself to the directory it's into.
 Your endpoint should be already working (you might need to wait some time for data to be gathered).
 
 You can also check if the cron job is running with the `speedtest.log` file.
+
+Now you need to edit the script config like this:
+```javascript
+// === CONFIG ===
+
+//general
+const TIME_STEP = 15; //minutes
+
+//CSV data
+const CSV_PATH = './speedtest.csv'; // path accessible by ajax request
+const CSV_SIZE = 8; // line max size
+const CSV_DATE = 3; // column containing the date
+const CSV_COLUMNS = [6, 7, 5];
+
+//Display data
+const GRAPH_TITLE = 'Speed-Test';
+const COLUMNS_NAME = ['Download', 'Upload', 'Ping'];
+const COLUMNS_FACTOR = [1 / 8e6, 1 / 8e6, 1];
+const COLUMNS_PRECISION = [3, 3, 3];
+const COLUMNS_SECONDARY = [false, false, true];
+const COLORS = [
+  'rgb(255,99,132)',
+  'rgb(54, 162, 235)',
+  'rgb(255, 159, 64)'
+];
+const Y_UNIT = 'MBps';
+const Y_SECONDARY_UNIT = 'ms';
+```

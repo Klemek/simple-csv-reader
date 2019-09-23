@@ -1,7 +1,5 @@
 // === CONFIG ===
 
-//colors
-
 //general
 const TIME_STEP = 15; //minutes
 
