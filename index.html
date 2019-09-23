@@ -1,76 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd">
+<!doctype html>
 <html lang="en">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Speed-Test</title>
     <script type="text/javascript" src="lib/Chart.min.js"></script>
-    <script type="text/javascript" src="lib/jquery.min.js"></script>
   </head>
   <body>
     <div style="width:75%">
       <canvas id="speedtest"></canvas>
     </div>
-    <script>
-  const red = 'rgb(255, 99, 132)';
-  const blue = 'rgb(54, 162, 235)';
-
-  const ctx = document.getElementById('speedtest').getContext('2d');
-  $.get('./speedtest.csv', (data)=>{
-    //Server ID,Sponsor,Server Name,Timestamp,Distance,Ping,Download,Upload,Share,IP Address
-    data = data.trim().split('\n').map(l=>l.split(','));
-    const stc = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: data.map(l => l[3].replace(/(\d*)-(\d*)-(\d*)T(\d*):(\d*)(.*)/,'$4:$5 $3/$2/$1')), //00:00 00/00/0000
-        datasets: [{
-          label: 'Download',
-          borderColor: red,
-          backgroundColor: red,
-          fill: false,
-          data: data.map(l => (parseFloat(l[6])/8e6).toFixed(3))
-        },{
-          label: 'Upload',
-          borderColor: blue,
-          backgroundColor: blue,
-          fill: false,
-          data: data.map(l => (parseFloat(l[7])/8e6).toFixed(3))
-        }],
-      },
-      options: {
-        responsive: true,
-        title: {
-          display: true,
-          text: 'Speed-Test'
-        },
-        tooltips: {
-          mode: 'index',
-          intersect: false,
-        },
-        hover: {
-          mode: 'nearest',
-          intersect: true
-        },
-        scales: {
-          xAxes: [{
-            display: true,
-            ticks: {display: false},
-            scaleLabel: {
-              display: true,
-              labelString: 'Time'
-            }
-          }],
-          yAxes: [{
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: 'MBps'
-            }
-          }]
-        }
-      },
-    });
-  });
-    </script>
+    <br>
+    <br>
+    <button id="allTime">All Time</button>
+    <button id="lastMonth">Month</button>
+    <button id="lastWeek">Week</button>
+    <button id="lastDay">24H</button>
+    <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
