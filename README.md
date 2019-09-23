@@ -9,7 +9,7 @@ You need to configure the `something_config.js` and update `index.html` file for
 
 ## Example: Speed-Test
 
-![](sample.png)
+![](docs/sample.png)
 
 First, pull this repo into your server:
 ```
@@ -88,7 +88,7 @@ const Y_SECONDARY_UNIT = 'ms';
 
 ## Example: System info
 
-![](sample2.png)
+![](docs/sample2.png)
 
 First, pull this repo into your server:
 ```
