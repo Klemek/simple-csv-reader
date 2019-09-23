@@ -203,7 +203,7 @@ function initData(data, sample) {
   }
 
   console.log('data processed');
-  updateData('all');
+  updateData(window.selected);
 }
 
 function createLog(date, values) {
@@ -234,11 +234,13 @@ window.onload = function () {
   document.title = GRAPH_TITLE;
   const ctx = document.getElementById('graph').getContext('2d');
   window.chart = new Chart(ctx, config);
+  window.selected = 'all';
 
   for (let d in datasets) {
     const btn = document.createElement('button');
     btn.innerText = datasets[d].name;
     btn.addEventListener('click', () => {
+      window.selected = d;
       updateData(d);
     });
     datasets[d].btn = btn;
@@ -246,6 +248,10 @@ window.onload = function () {
   }
 
   document.getElementById('reload').addEventListener('click', load);
+
+  setInterval(() => {
+    load();
+  }, TIME_STEP * 60 * 1000);
 };
 
 function load() {
