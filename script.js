@@ -169,8 +169,9 @@ function initData(data, sample) {
     raw: data,
   };
   for (let d in datasets) {
-    window.data[d] = crunch(data, datasets[d].max, datasets[d].time ? datasets[d].time / TIME_STEP : undefined);
-    if (window.data[d].length < MINIMUM_DATA)
+    const maxLen = datasets[d].time ? datasets[d].time / TIME_STEP : undefined;
+    window.data[d] = crunch(data, datasets[d].max, maxLen);
+    if (window.data[d].length < MINIMUM_DATA || (maxLen && maxLen > data.length))
       datasets[d].btn.setAttribute('disabled', '');
     else
       datasets[d].btn.removeAttribute('disabled');
