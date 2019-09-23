@@ -5,6 +5,7 @@ const TIME_STEP = 15; //minutes
 
 //CSV data
 const CSV_PATH = './speedtest.csv'; // path accessible by ajax request
+const CSV_SEPARATOR = ',';
 const CSV_SIZE = 8; // line max size
 const CSV_DATE = 3; // column containing the date
 const CSV_COLUMNS = [6, 7, 5];
@@ -254,7 +255,7 @@ window.onload = function () {
 
 function load() {
   get(CSV_PATH).then((data) => {
-    data = data.trim().split('\n').map(l => l.split(','));
+    data = data.trim().split('\n').map(l => l.split(CSV_SEPARATOR));
     if (data.length === 0 || data[0].length < CSV_SIZE) {
       initData(generateSampleData(), true);
     } else {
