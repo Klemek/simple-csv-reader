@@ -9,18 +9,21 @@ const TIME_STEP = 15; //minutes
 const CSV_PATH = './speedtest.csv'; // path accessible by ajax request
 const CSV_SIZE = 8; // line max size
 const CSV_DATE = 3; // column containing the date
-const CSV_COLUMNS = [6, 7];
+const CSV_COLUMNS = [6, 7, 5];
 
 //Display data
 const GRAPH_TITLE = 'Speed-Test';
-const COLUMNS_NAME = ['Download', 'Upload'];
-const COLUMNS_FACTOR = [1 / 8e6, 1 / 8e6];
-const COLUMNS_FIXED = [3, 3];
+const COLUMNS_NAME = ['Download', 'Upload', 'Ping'];
+const COLUMNS_FACTOR = [1 / 8e6, 1 / 8e6, 1];
+const COLUMNS_PRECISION = [3, 3, 3];
+const COLUMNS_SECONDARY = [false, false, true];
 const COLORS = [
   'rgb(255,99,132)',
-  'rgb(54, 162, 235)'
+  'rgb(54, 162, 235)',
+  'rgb(255, 159, 64)'
 ];
 const Y_UNIT = 'MBps';
+const Y_SECONDARY_UNIT = 'ms';
 
 // === ADVANCED CONFIG ===
 
@@ -81,7 +84,8 @@ const config = {
       borderColor: COLORS[i],
       backgroundColor: COLORS[i],
       fill: false,
-      data: []
+      data: [],
+      yAxisID: COLUMNS_SECONDARY[i] ? 'B' : 'A'
     })),
   },
   options: {
@@ -93,6 +97,14 @@ const config = {
     tooltips: {
       mode: 'index',
       intersect: false,
+      callbacks: {
+        label: function (tooltipItem) {
+          let label = COLUMNS_NAME[tooltipItem.datasetIndex] || '';
+          if (label)
+            label += ': ' + tooltipItem.yLabel.toFixed(COLUMNS_PRECISION[tooltipItem.datasetIndex]) + ' ' + (COLUMNS_SECONDARY[tooltipItem.datasetIndex] ? Y_SECONDARY_UNIT : Y_UNIT);
+          return label;
+        }
+      }
     },
     hover: {
       mode: 'nearest',
@@ -108,10 +120,23 @@ const config = {
         }
       }],
       yAxes: [{
+        id: 'A',
         display: true,
+        position: 'left',
         scaleLabel: {
           display: true,
           labelString: Y_UNIT
+        },
+        ticks: {
+          beginAtZero: true
+        }
+      }, {
+        id: 'B',
+        display: COLUMNS_SECONDARY.includes(true),
+        position: 'right',
+        scaleLabel: {
+          display: true,
+          labelString: Y_SECONDARY_UNIT
         },
         ticks: {
           beginAtZero: true
@@ -135,7 +160,7 @@ function get(url) {
 function updateData(d) {
   config.data.labels = window.data[d].map(l => new Date(l[CSV_DATE]).format(datasets[d].format));
   CSV_COLUMNS.forEach((n, i) => {
-    config.data.datasets[i].data = window.data[d].map(l => (parseFloat(l[CSV_COLUMNS[i]]) * COLUMNS_FACTOR[i]).toFixed(COLUMNS_FIXED[i]));
+    config.data.datasets[i].data = window.data[d].map(l => (parseFloat(l[CSV_COLUMNS[i]]) * COLUMNS_FACTOR[i]));
   });
   config.options.title.text = `${GRAPH_TITLE} (${datasets[d].name})${window.data.sample ? ' (Sample data)' : ''}`;
   document.title = config.options.title.text;
