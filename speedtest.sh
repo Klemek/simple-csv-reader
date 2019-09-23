@@ -1,7 +1,8 @@
 #!/bin/sh
-#*/15 * * * * /var/www/html/speedtest.sh >> /var/www/html/speedtest.log 2>&1
+SCRIPT=`realpath -s $0`
+DIR=`dirname ${SCRIPT}`
 echo `date` started
-/usr/local/bin/speedtest-cli --single --csv >> /var/www/html/speedtest.csv
+/usr/local/bin/speedtest-cli --single --csv >> ${DIR}/speedtest.csv
 echo `date` done
 
 
