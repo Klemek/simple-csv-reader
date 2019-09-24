@@ -203,6 +203,19 @@ function generateSampleData() {
   return sampleData;
 }
 
+function load() {
+  get(CSV_PATH).then((data) => {
+    data = data.trim().split('\n').map(l => l.split(CSV_SEPARATOR));
+    if (data.length === 0 || data[0].length < CSV_SIZE) {
+      initData(generateSampleData(), true);
+    } else {
+      initData(data, false);
+    }
+  }).catch(() => {
+    initData(generateSampleData(), true);
+  });
+}
+
 window.onload = function () {
   document.title = GRAPH_TITLE;
   const ctx = document.getElementById('graph').getContext('2d');
@@ -225,20 +238,6 @@ window.onload = function () {
   setInterval(() => {
     load();
   }, Math.max(TIME_STEP * 60 * 1000, 10000));
+  
+  load();
 };
-
-function load() {
-  get(CSV_PATH).then((data) => {
-    data = data.trim().split('\n').map(l => l.split(CSV_SEPARATOR));
-    if (data.length === 0 || data[0].length < CSV_SIZE) {
-      initData(generateSampleData(), true);
-    } else {
-      initData(data, false);
-    }
-  }).catch(() => {
-    initData(generateSampleData(), true);
-  });
-}
-
-
-load();
