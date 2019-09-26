@@ -1,11 +1,11 @@
-# SimpleCSVReader
+# Simple CSV Reader
 
 A static web page where you can read data from a CSV into a simple graph.
 Set-up a cron job to update the CSV file and you're ready to go.
 
 You need to configure the `something_config.js` and update `index.html` file for your case.
 
-**[live example](https://klemek.github.io/SimpleCSVReader/)**
+**[live example](https://klemek.github.io/Simple-CSV-Reader/)**
 
 ## Example: Speed-Test
 
@@ -15,7 +15,7 @@ First, pull this repo into your server:
 ```
 cd /path/to/server/files
 mkdir speedtest
-git clone https://github.com/klemek/SimpleCSVReader speedtest
+git clone https://github.com/klemek/Simple-CSV-Reader speedtest
 cd speedtest
 ```
 
@@ -94,8 +94,8 @@ First, pull this repo into your server:
 ```
 cd /path/to/server/files
 mkdir speedtest
-git clone https://github.com/klemek/SimpleCSVReader speedtest
-cd speedtest
+git clone https://github.com/klemek/Simple-CSV-Reader sysinfo
+cd sysinfo
 ```
 
 Write your job script inside the same directory like this (already available in this repo):
