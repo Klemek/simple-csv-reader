@@ -93,7 +93,7 @@ const Y_SECONDARY_UNIT = 'ms';
 First, pull this repo into your server:
 ```
 cd /path/to/server/files
-mkdir speedtest
+mkdir sysinfo
 git clone https://github.com/klemek/Simple-CSV-Reader sysinfo
 cd sysinfo
 ```
