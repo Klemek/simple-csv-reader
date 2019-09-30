@@ -1,3 +1,6 @@
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Klemek/simple-csv-reader.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Klemek/simple-csv-reader/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/Klemek/simple-csv-reader.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Klemek/simple-csv-reader/alerts/)
+
 # Simple CSV Reader
 
 A static web page where you can read data from a CSV into a simple graph.
